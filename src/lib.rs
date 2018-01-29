@@ -13,15 +13,20 @@
 //! * https://en.wikipedia.org/wiki/PID_controller
 //! * http://www.embedded.com/design/prototyping-and-development/4211211/PID-without-a-PhD
 //! * http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-introduction/
+#![cfg_attr(not(feature = "std"), no_std)]
+#![cfg_attr(not(feature = "std"), feature(core_float))]
 
-// FIXME: it may be worth to explore http://de.mathworks.com/help/simulink/slref/pidcontroller.html
-//        for additional features/inspiration
-
+#[cfg(feature = "std")]
 extern crate core;
+use core::f64;
+
+#[cfg(not(feature = "std"))]
+use core::num::Float;
 
 pub mod util;
 
-use std::f64;
+// FIXME: it may be worth to explore http://de.mathworks.com/help/simulink/slref/pidcontroller.html
+//        for additional features/inspiration
 
 /// A generic controller interface.
 ///
